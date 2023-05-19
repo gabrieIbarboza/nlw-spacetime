@@ -11,6 +11,7 @@ Projeto em desenvolvimento no evento Next Level Week 12 - Spacetime da Rocketsea
 - [Installation](#installation)
 - [1st Class Notes](#1st-class-notes---setup-do-projeto)
 - [2nd Class Notes](#2nd-class-notes---home-frontend--api--crud)
+- [3rd Class Notes](#3rd-class-notes---security)
 
 ## Installation
 Coming soon...
@@ -60,7 +61,7 @@ Coming soon...
 #### Tailwind
 - Sempre multiplicado por 4. Ex: `.p-16` = `padding: 4rem/* 64px */;`
 - `leading-relaxed` = `line-height: 1.625;` que é melhor para ler
-- width personalizado: `w-[360px]`
+- Especificar valor customizado direto na classe => Utilizar a sintaxe `-[valor]`. Ex: width personalizado `w-[360px]`
 - px = padding horizontal | py = padding vertical
 - `repeting-linear-gradient()` mais novo e mais simples, porém nem sempre compatível
 - escolher opacidade usando / ex: `border-white/10`
@@ -70,6 +71,8 @@ Coming soon...
 #### a
 - a com `target='_blank'`, mas sem `rel="noreferrer"` é um brecha de securança
 ### Frontend Mobile
+- flag para iniciar a aplicação com o cache limpo no Expo CLI => `--clear`
+- Componente TouchableOpacity => Renderiza um botão com efeito de opacidade ao ser pressionado.
 - Componente ImageBackground ~= div com image de background
 - Arquivo "assets.d.ts" só para tipagem do typescript
 - `declare module '*.png'` no assets.d.ts para não considerar erro importar arquivos .png
@@ -81,6 +84,52 @@ Coming soon...
 - `npx prisma migrate reset` reseta o banco
 - `npx prisma migrate dev` criar versão do banco
 #### CRUD
+- CRUD = Create, Read, Update, Delete
+- CRUD no Http = POST, GET, PUT, DELETE
 - `npm i zod` para fazer validação do Id
 #### Cors - Segurança
 - `npm i @fastify/cors` instalar para ter uma técnica de segurança do backend para determinar quais endereços (urls) podem acessar a API
+### Pass
+- `BUILDTHEFUTURE`
+
+## 3rd Class Notes - Security
+- useEffect no React é uma função que permite monitorar a mudança de valor numa variável
+### Fluxo de Autenticação
+- OAuth => "Permite fazer login dentro de uma aplicação usando uma conta existente em outra aplicação"
+- Frontend - Fazer login => Login GitHub => Redirecionamento de volta p/ minha aplicação + `?code=` => Enviar `?code=` p/ backend => Verificar `?code=` na API do GitHub => API retorna access_token => requisitar `/user` para a API => Receber `{ name, login, avatarUrl }` => Salvar no DB
+- Mobile => WebBrowser => `?code=`
+### GitHub
+- No GitHub Register a new OAuth application
+- `NEXT_PUBLIC_` é o prefixo correto para armazenar variáveis ambiente públicas (ou seja, expostas ao cliente) no NextJs
+### Backend P1
+- `npm i dotenv -D` = arquivos consigam acessar as variáveis ambiente
+- `npm i axios` = ótima e simples forma de fazer requisições Http
+- O acess_token expira rapidamente (menos de um dia), então...
+### JWT
+- JSON Web Token
+- Token criado pelo Backend, enviado para o frotend para ele usar esse token nas requisões que ele faz para o backend no futuro
+- A função do token na autenticação via OAuth é identificar o usuário no sistema
+- O caso de uso mais comum para token JWT é armazenar informações de login de um usuário
+- `npm i @fastify/jwt`
+- auth.d.ts
+### Frontend
+- Há rotas que não precisam mostrar nada para o usuário e o Next incorpora isso
+- No Next cada pasta é um caminho na URL
+- Acessar um URL é sempre um método GET
+- Salvei o Token nos cookies pela primeira vez!!
+- `import { cookies } from 'next/headers'`
+- `npm i jwt-decode`
+- Permitir no next.config.js o uso de imagens do dominío "avatars.githubusercontent.com"
+### Mobile
+- [Expo AuthSession](https://docs.expo.dev/versions/latest/sdk/auth-session/) - Recurso para gerenciar sessões de autenticação no Expo.
+- [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore/) no lugar de salvar nos cookies
+- [Expo Router](https://expo.github.io/router/docs)
+- Para a aplicação mobile conseguir se conectar com o back-end, a configuração `host: '0.0.0.0'` precisa ser adicionada na api
+### Pass
+- `NEVERSTOPLEARNING` - Mantra da Rocketseat
+
+## 4th Class Notes - ...
+
+## Start Project
+- Frontend/Backend: `npm run dev`
+- Mobile: `npm run start` `npx expo start --clear
