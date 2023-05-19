@@ -128,7 +128,11 @@ Coming soon...
 ### Pass
 - `NEVERSTOPLEARNING` - Mantra da Rocketseat
 
-## 4th Class Notes - ...
+## 4th Class Notes - Integrando Web e Mobile
+### Frontend
+- Arquivo `layout.tsx` é tudo aquilo que está presente em todas as páginas da aplicação
+- Link melhor que Âncora, para o Next fazer otimizações
+- Não tem como `Delete-cookie` então seta o cookie sem valor e com max-age=0. Ex: `'Set-Cookie': 'token=; Path=/; max-age=0;'`
 
 ## Start Project
 - Frontend/Backend: `npm run dev`
